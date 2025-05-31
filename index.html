@@ -934,7 +934,6 @@
                 showMessage('Email ou mot de passe incorrect', 'error');
             }
         }
-        
         function register() {
             const name = document.getElementById('registerName').value;
             const email = document.getElementById('registerEmail').value;
@@ -1312,21 +1311,31 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-// Fonctions de partage (placeholders)
+// Fonctions de partage
 function shareOnFacebook() {
-    showMessage('Fonctionnalité de partage Facebook à implémenter', 'success');
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent("Découvrez MoodMate - Mon journal d'humeur interactif !");
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
 }
 
 function shareOnTwitter() {
-    showMessage('Fonctionnalité de partage Twitter à implémenter', 'success');
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent("Je découvre MoodMate - Un super journal d'humeur interactif !");
+    window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
 }
 
 function shareOnInstagram() {
-    showMessage('Fonctionnalité de partage Instagram à implémenter', 'success');
+    // Instagram ne permet pas le partage direct depuis le web
+    // On propose plutôt de copier le lien dans le presse-papiers
+    navigator.clipboard.writeText(window.location.href)
+        .then(() => showMessage('Lien copié dans le presse-papiers ! Collez-le dans votre story Instagram.', 'success'))
+        .catch(() => showMessage('Impossible de copier le lien. Veuillez le copier manuellement.', 'error'));
 }
 
 function shareOnWhatsApp() {
-    showMessage('Fonctionnalité de partage WhatsApp à implémenter', 'success');
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent("Regarde MoodMate - Mon journal d'humeur interactif !");
+    window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
 }
 </script>
 </body>
