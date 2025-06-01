@@ -6,9 +6,8 @@
     <title>MoodMate - Suivez et partagez vos humeurs</title>
     <meta property="og:title" content="MoodMate - Journal d'humeur interactif">
     <meta property="og:description" content="Suivez, analysez et partagez vos humeurs quotidiennes avec MoodMate">
-    <meta property="og:image" content="https://example.com/moodmate-social.jpg">
-    <meta property="og:url" content="https://moodmate.example.com">
-    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:url" content="https://www.moodmate-app.com">
+    <meta name="twitter:card" content="summary">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -1281,10 +1280,10 @@
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
 
-        // Fonctions de partage améliorées
+        // Fonctions de partage avec URLs réelles
         function shareOnFacebook() {
-            const url = "https://moodmate.example.com";
-            const quote = "Découvrez MoodMate - Mon journal d'humeur interactif !";
+            const url = "https://www.moodmate-app.com";
+            const quote = "Je utilise MoodMate pour suivre mon humeur au quotidien. Essayez-le vous aussi !";
             
             const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(quote)}`;
             
@@ -1297,18 +1296,17 @@
         }
 
         function shareOnInstagram() {
-            const url = "https://moodmate.example.com";
-            const text = "Découvrez MoodMate - Mon journal d'humeur interactif ! 🌟 #BienEtre #JournalHumeur";
+            const url = "https://www.moodmate-app.com";
+            const text = "Découvrez MoodMate - L'application qui vous aide à comprendre vos humeurs ! ✨ #BienEtre #SantéMentale";
             
-            // Solution optimale pour tous les appareils
+            // Solution optimale pour mobile
             if (navigator.share) {
-                // Utilisation de l'API Web Share si disponible (mobile)
                 navigator.share({
                     title: 'MoodMate',
                     text: text,
                     url: url
                 }).catch(err => {
-                    console.log('Erreur de partage:', err);
+                    console.error('Erreur de partage:', err);
                     fallbackShare();
                 });
             } else {
@@ -1316,38 +1314,34 @@
             }
             
             function fallbackShare() {
-                // Solution pour iOS
-                if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                    window.open(`instagram://library?AssetPath=${encodeURIComponent(url)}&InstagramCaption=${encodeURIComponent(text)}`, '_blank');
-                } 
-                // Solution pour Android
-                else if (/Android/i.test(navigator.userAgent)) {
-                    window.open(`intent://share?text=${encodeURIComponent(text + "\n" + url)}#Intent;package=com.instagram.android;scheme=https;end`, '_blank');
+                // Solution native pour iOS/Android
+                if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+                    window.open(`instagram://share?url=${encodeURIComponent(url)}&description=${encodeURIComponent(text)}`, '_blank');
                 }
                 // Solution pour desktop
                 else {
                     window.open('https://www.instagram.com/', '_blank');
                 }
                 
-                // Copie dans le presse-papiers en fallback
+                // Fallback universel - Copie dans le presse-papiers
                 setTimeout(() => {
                     const fullText = `${text}\n${url}`;
                     navigator.clipboard.writeText(fullText)
-                        .then(() => showMessage('Lien copié ! Ouvrez Instagram pour partager.', 'success'))
+                        .then(() => showMessage('Lien copié ! Ouvrez Instagram et collez-le dans votre post.', 'success'))
                         .catch(() => showMessage(`Ouvrez Instagram et partagez : ${fullText}`, 'error'));
                 }, 300);
             }
         }
 
         function shareOnTwitter() {
-            const url = encodeURIComponent("https://moodmate.example.com");
-            const text = encodeURIComponent("Je découvre MoodMate - Un super journal d'humeur interactif !");
+            const url = encodeURIComponent("https://www.moodmate-app.com");
+            const text = encodeURIComponent("Je découvre MoodMate - Un super outil pour suivre mon bien-être émotionnel !");
             window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
         }
 
         function shareOnWhatsApp() {
-            const url = encodeURIComponent("https://moodmate.example.com");
-            const text = encodeURIComponent("Regarde MoodMate - Mon journal d'humeur interactif !");
+            const url = encodeURIComponent("https://www.moodmate-app.com");
+            const text = encodeURIComponent("Regarde cette app géniale pour suivre tes humeurs :");
             window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
         }
     </script>
