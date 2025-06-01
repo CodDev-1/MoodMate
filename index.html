@@ -38,7 +38,6 @@
             overflow-x: hidden;
         }
 
-        /* Décorations florales */
         .decoration {
             position: absolute;
             z-index: 0;
@@ -115,7 +114,6 @@
             font-weight: 400;
         }
 
-        /* Mood Selector */
         .mood-selector {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -186,7 +184,6 @@
             color: var(--text-secondary);
         }
 
-        /* Note Section */
         .note-section {
             margin-bottom: 30px;
             background: white;
@@ -227,7 +224,6 @@
             box-shadow: 0 0 0 3px rgba(201, 158, 115, 0.2);
         }
 
-        /* Forms */
         .auth-section {
             max-width: 500px;
             margin: 0 auto 40px;
@@ -330,7 +326,6 @@
             text-decoration: underline;
         }
 
-        /* History Section */
         .history-section {
             margin-top: 30px;
             padding-top: 20px;
@@ -397,7 +392,6 @@
             gap: 10px;
         }
 
-        /* Chart Section */
         .chart-section {
             margin-top: 30px;
             padding: 20px;
@@ -412,7 +406,6 @@
             width: 100%;
         }
 
-        /* Social Sharing */
         .social-sharing {
             margin-top: 40px;
             padding-top: 20px;
@@ -455,7 +448,6 @@
         .instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
         .whatsapp { background: #25d366; }
 
-        /* User Section */
         .user-section {
             display: flex;
             justify-content: space-between;
@@ -520,7 +512,6 @@
             background: rgba(231, 76, 60, 0.1);
         }
 
-        /* Message */
         .message {
             padding: 15px;
             border-radius: 8px;
@@ -541,7 +532,6 @@
             border: 1px solid #e74c3c;
         }
 
-        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -590,19 +580,16 @@
             margin-top: 20px;
         }
 
-        /* Hide elements */
         .hidden {
             display: none;
         }
     </style>
 </head>
 <body>
-    <!-- Décorations florales -->
     <div class="decoration decoration-1">✿</div>
     <div class="decoration decoration-2">❀</div>
     <div class="decoration decoration-3">✾</div>
 
-    <!-- Modal de confirmation -->
     <div class="modal" id="confirmModal">
         <div class="modal-content">
             <span class="modal-close" id="modalClose">&times;</span>
@@ -615,7 +602,6 @@
         </div>
     </div>
 
-    <!-- Modal de suppression de compte -->
     <div class="modal" id="deleteAccountModal">
         <div class="modal-content">
             <span class="modal-close" id="deleteAccountModalClose">&times;</span>
@@ -987,21 +973,18 @@
             showMessage('Inscription réussie ! Bienvenue sur MoodMate', 'success');
         }
 
-        // Fonction pour afficher le formulaire d'inscription
         function showRegisterForm(e) {
             e.preventDefault();
             document.getElementById('registerSection').classList.remove('hidden');
             document.querySelector('.auth-section:not(#registerSection)').classList.add('hidden');
         }
 
-        // Fonction pour afficher le formulaire de connexion
         function showLoginForm(e) {
             if (e) e.preventDefault();
             document.getElementById('registerSection').classList.add('hidden');
             document.querySelector('.auth-section:not(#registerSection)').classList.remove('hidden');
         }
 
-        // Fonction pour déconnecter l'utilisateur
         function logout() {
             currentUser = null;
             localStorage.removeItem('currentUser');
@@ -1012,7 +995,6 @@
             showMessage('Vous avez été déconnecté avec succès', 'success');
         }
 
-        // Fonction pour afficher le contenu de l'application
         function showAppContent() {
             authSection.classList.add('hidden');
             appContent.classList.remove('hidden');
@@ -1027,7 +1009,6 @@
             initChart();
         }
 
-        // Fonction pour enregistrer l'humeur actuelle
         function saveCurrentMood() {
             if (!selectedMood) {
                 showMessage('Veuillez sélectionner une humeur', 'error');
@@ -1060,7 +1041,6 @@
             showMessage('Humeur enregistrée avec succès', 'success');
         }
 
-        // Fonction pour charger l'historique
         function loadHistory() {
             if (!currentUser) return;
 
@@ -1098,7 +1078,6 @@
             });
         }
 
-        // Fonction pour obtenir l'emoji correspondant à l'humeur
         function getMoodEmoji(mood) {
             const emojis = {
                 happy: '😊',
@@ -1111,7 +1090,6 @@
             return emojis[mood] || '😐';
         }
 
-        // Fonction pour formater la date
         function formatDate(dateString) {
             const options = { 
                 weekday: 'long', 
@@ -1124,7 +1102,6 @@
             return new Date(dateString).toLocaleDateString('fr-FR', options);
         }
 
-        // Fonction pour afficher un message
         function showMessage(message, type) {
             messageContainer.innerHTML = `
                 <div class="message ${type}">${message}</div>
@@ -1140,7 +1117,6 @@
             }, 5000);
         }
 
-        // Fonction pour initialiser le graphique
         function initChart() {
             const ctx = document.getElementById('moodChart').getContext('2d');
             
@@ -1184,7 +1160,6 @@
             updateChart();
         }
 
-        // Fonction pour mettre à jour le graphique
         function updateChart() {
             if (!moodChart) return;
 
@@ -1216,7 +1191,6 @@
             moodChart.update();
         }
 
-        // Fonction pour afficher la modal de confirmation de suppression
         function showDeleteConfirmation(entryId) {
             entryToDelete = entryId;
             document.getElementById('modalTitle').textContent = 'Confirmer la suppression';
@@ -1224,13 +1198,11 @@
             confirmModal.style.display = 'flex';
         }
 
-        // Fonction pour fermer la modal
         function closeModal() {
             confirmModal.style.display = 'none';
             entryToDelete = null;
         }
 
-        // Fonction pour confirmer la suppression
         function confirmDelete() {
             if (!entryToDelete) return;
 
@@ -1245,7 +1217,6 @@
             showMessage('Entrée supprimée avec succès', 'success');
         }
 
-        // Fonction pour éditer une entrée
         function editEntry(entryId) {
             const entry = userHistory.find(e => e.id === entryId);
             if (!entry) return;
@@ -1274,7 +1245,6 @@
             showMessage('Modifiez votre entrée et cliquez sur "Mettre à jour"', 'success');
         }
 
-        // Fonction pour mettre à jour une entrée
         function updateEntry(entryId) {
             if (!selectedMood) {
                 showMessage('Veuillez sélectionner une humeur', 'error');
@@ -1307,20 +1277,17 @@
             }
         }
 
-        // Fonctions utilitaires
         function capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
 
-        // Fonctions de partage
+        // Fonctions de partage améliorées
         function shareOnFacebook() {
             const url = "https://moodmate.example.com";
             const quote = "Découvrez MoodMate - Mon journal d'humeur interactif !";
             
-            // Solution de fallback pour tous les navigateurs
             const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(quote)}`;
             
-            // Ouvrir dans une nouvelle fenêtre avec des dimensions appropriées
             const width = 600, height = 400;
             const left = (window.innerWidth - width) / 2;
             const top = (window.innerHeight - height) / 2;
@@ -1329,43 +1296,53 @@
                 `width=${width},height=${height},top=${top},left=${left}`);
         }
 
-        function shareOnTwitter() {
-            const url = encodeURIComponent("https://moodmate.example.com");
-            const text = encodeURIComponent("Je découvre MoodMate - Un super journal d'humeur interactif !");
-            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
-        }
-
         function shareOnInstagram() {
             const url = "https://moodmate.example.com";
-            const text = "Découvrez MoodMate - Mon journal d'humeur interactif !";
+            const text = "Découvrez MoodMate - Mon journal d'humeur interactif ! 🌟 #BienEtre #JournalHumeur";
             
-            // Solution pour mobile avec Web Share API
+            // Solution optimale pour tous les appareils
             if (navigator.share) {
+                // Utilisation de l'API Web Share si disponible (mobile)
                 navigator.share({
                     title: 'MoodMate',
                     text: text,
                     url: url
                 }).catch(err => {
                     console.log('Erreur de partage:', err);
-                    fallbackCopy(url, text);
+                    fallbackShare();
                 });
-            } 
-            // Solution pour desktop - ouvre la page Instagram dans un nouvel onglet
-            else if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-                // Pour mobile mais sans Web Share API
-                fallbackCopy(url, text);
             } else {
-                // Pour desktop - on ne peut pas partager directement sur Instagram, donc on ouvre simplement Instagram
-                window.open('https://www.instagram.com/', '_blank');
-                fallbackCopy(url, text);
+                fallbackShare();
             }
             
-            function fallbackCopy(url, text) {
-                const fullText = `${text}\n${url}`;
-                navigator.clipboard.writeText(fullText)
-                    .then(() => showMessage('Lien copié dans le presse-papiers ! Collez-le dans votre story Instagram.', 'success'))
-                    .catch(() => showMessage(`Impossible de copier le lien. Veuillez le copier manuellement: ${text}\n${url}`, 'error'));
+            function fallbackShare() {
+                // Solution pour iOS
+                if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                    window.open(`instagram://library?AssetPath=${encodeURIComponent(url)}&InstagramCaption=${encodeURIComponent(text)}`, '_blank');
+                } 
+                // Solution pour Android
+                else if (/Android/i.test(navigator.userAgent)) {
+                    window.open(`intent://share?text=${encodeURIComponent(text + "\n" + url)}#Intent;package=com.instagram.android;scheme=https;end`, '_blank');
+                }
+                // Solution pour desktop
+                else {
+                    window.open('https://www.instagram.com/', '_blank');
+                }
+                
+                // Copie dans le presse-papiers en fallback
+                setTimeout(() => {
+                    const fullText = `${text}\n${url}`;
+                    navigator.clipboard.writeText(fullText)
+                        .then(() => showMessage('Lien copié ! Ouvrez Instagram pour partager.', 'success'))
+                        .catch(() => showMessage(`Ouvrez Instagram et partagez : ${fullText}`, 'error'));
+                }, 300);
             }
+        }
+
+        function shareOnTwitter() {
+            const url = encodeURIComponent("https://moodmate.example.com");
+            const text = encodeURIComponent("Je découvre MoodMate - Un super journal d'humeur interactif !");
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
         }
 
         function shareOnWhatsApp() {
