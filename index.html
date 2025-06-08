@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MoodMate - Suivez et partagez vos humeurs</title>
-    <meta name="description" content="Journal d'humeur interactif pour suivre et analyser vos émotions quotidiennes">
     <meta property="og:title" content="MoodMate - Journal d'humeur interactif">
     <meta property="og:description" content="Suivez, analysez et partagez vos humeurs quotidiennes avec MoodMate">
-    <meta property="og:image" content="https://example.com/moodmate-preview.jpg">
-    <meta property="og:url" content="https://coddev-1.github.io/MoodMate/">
+    <meta property="og:image" content="https://example.com/moodmate-social.jpg">
+    <meta property="og:url" content="https://moodmate.example.com">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -26,14 +25,6 @@
             --text-primary: #4a3c2a;
             --text-secondary: #7a6a5a;
             --shadow: rgba(0, 0, 0, 0.1);
-            --happy: #FFD700;
-            --sad: #1E90FF;
-            --angry: #FF4500;
-            --stressed: #9370DB;
-            --tired: #A9A9A9;
-            --calm: #32CD32;
-            --success: #27ae60;
-            --error: #e74c3c;
         }
 
         body {
@@ -45,15 +36,6 @@
             align-items: center;
             position: relative;
             overflow-x: hidden;
-            transition: background 0.3s ease;
-        }
-
-        body.dark-mode {
-            background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%);
-            --paper-bg: #2d2d2d;
-            --paper-border: #444;
-            --text-primary: #f0f0f0;
-            --text-secondary: #aaa;
         }
 
         .decoration {
@@ -98,29 +80,6 @@
             position: relative;
             z-index: 1;
             background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d9c9a9' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
-            transition: background-color 0.3s ease;
-        }
-
-        .dark-mode-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255,255,255,0.2);
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: var(--text-primary);
-            z-index: 10;
-            transition: all 0.3s ease;
-        }
-
-        .dark-mode-toggle:hover {
-            transform: scale(1.1);
         }
 
         header {
@@ -141,11 +100,6 @@
         .logo i {
             font-size: 2.5rem;
             color: #c99e73;
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover i {
-            transform: rotate(15deg);
         }
 
         h1 {
@@ -205,22 +159,17 @@
             transform: scale(1.05);
         }
 
-        .mood-option.happy::before { background-color: var(--happy); }
-        .mood-option.sad::before { background-color: var(--sad); }
-        .mood-option.angry::before { background-color: var(--angry); }
-        .mood-option.stressed::before { background-color: var(--stressed); }
-        .mood-option.tired::before { background-color: var(--tired); }
-        .mood-option.calm::before { background-color: var(--calm); }
+        .mood-option.happy::before { background-color: #FFD700; }
+        .mood-option.sad::before { background-color: #1E90FF; }
+        .mood-option.angry::before { background-color: #FF4500; }
+        .mood-option.stressed::before { background-color: #9370DB; }
+        .mood-option.tired::before { background-color: #A9A9A9; }
+        .mood-option.calm::before { background-color: #32CD32; }
 
         .mood-emoji {
             font-size: 3.5rem;
             margin-bottom: 15px;
             display: block;
-            transition: transform 0.3s ease;
-        }
-
-        .mood-option:hover .mood-emoji {
-            transform: scale(1.1);
         }
 
         .mood-name {
@@ -241,7 +190,6 @@
             border-radius: 12px;
             padding: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
         }
 
         .note-title {
@@ -268,7 +216,6 @@
             transition: all 0.3s;
             resize: vertical;
             font-family: inherit;
-            color: var(--text-primary);
         }
 
         textarea:focus {
@@ -284,7 +231,6 @@
             background: rgba(255, 255, 255, 0.7);
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
         }
 
         .form-title {
@@ -313,7 +259,6 @@
             font-size: 1rem;
             background: rgba(255, 255, 255, 0.8);
             transition: all 0.3s;
-            color: var(--text-primary);
         }
 
         input:focus {
@@ -339,7 +284,6 @@
         .btn:hover {
             background: #b88c5e;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .btn-secondary {
@@ -358,7 +302,7 @@
         }
 
         .btn-danger {
-            background: var(--error);
+            background: #e74c3c;
         }
 
         .btn-danger:hover {
@@ -409,12 +353,6 @@
             align-items: center;
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
             position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .history-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
         }
 
         .history-emoji {
@@ -460,7 +398,6 @@
             background: white;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
         }
 
         .chart-container {
@@ -503,7 +440,7 @@
         }
 
         .social-icon:hover {
-            transform: translateY(-5px) scale(1.1);
+            transform: translateY(-5px);
         }
 
         .facebook { background: #3b5998; }
@@ -534,11 +471,6 @@
             justify-content: center;
             color: white;
             font-weight: bold;
-            transition: transform 0.3s ease;
-        }
-
-        .user-avatar:hover {
-            transform: scale(1.1);
         }
 
         .user-name {
@@ -572,7 +504,7 @@
         }
 
         .text-danger {
-            color: var(--error);
+            color: #e74c3c;
         }
 
         .text-danger:hover {
@@ -586,19 +518,17 @@
             margin-bottom: 20px;
             text-align: center;
             font-weight: 500;
-            opacity: 1;
-            transition: opacity 0.3s ease;
         }
 
         .message.success {
             background: rgba(46, 204, 113, 0.2);
-            color: var(--success);
+            color: #27ae60;
             border: 1px solid #2ecc71;
         }
 
         .message.error {
             background: rgba(231, 76, 60, 0.2);
-            color: var(--error);
+            color: #c0392b;
             border: 1px solid #e74c3c;
         }
 
@@ -613,29 +543,16 @@
             z-index: 100;
             justify-content: center;
             align-items: center;
-            transition: all 0.3s ease;
         }
 
         .modal-content {
-            background: var(--paper-bg);
+            background: white;
             padding: 30px;
             border-radius: 12px;
             width: 90%;
             max-width: 500px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
             position: relative;
-            transform: translateY(-20px);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .modal.show {
-            display: flex;
-        }
-
-        .modal.show .modal-content {
-            transform: translateY(0);
-            opacity: 1;
         }
 
         .modal-close {
@@ -645,7 +562,6 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: var(--text-secondary);
-            transition: color 0.3s ease;
         }
 
         .modal-close:hover {
@@ -667,37 +583,12 @@
         .hidden {
             display: none;
         }
-
-        @media (max-width: 600px) {
-            .container {
-                padding: 15px;
-            }
-            
-            .mood-selector {
-                grid-template-columns: 1fr;
-            }
-            
-            .user-section {
-                flex-direction: column;
-                gap: 15px;
-                align-items: flex-start;
-            }
-            
-            .user-actions {
-                width: 100%;
-                justify-content: space-between;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="decoration decoration-1">✿</div>
     <div class="decoration decoration-2">❀</div>
     <div class="decoration decoration-3">✾</div>
-
-    <button class="dark-mode-toggle" id="darkModeToggle">
-        <i class="fas fa-moon"></i>
-    </button>
 
     <div class="modal" id="confirmModal">
         <div class="modal-content">
@@ -877,554 +768,575 @@
     </div>
 
     <script>
-        class MoodMateApp {
-            constructor() {
-                this.currentUser = null;
-                this.userHistory = [];
-                this.selectedMood = null;
-                this.moodChart = null;
-                this.entryToDelete = null;
-                this.darkMode = false;
-                this.editingEntryId = null;
+        // États de l'application
+        let currentUser = null;
+        let userHistory = [];
+        let selectedMood = null;
+        let moodChart = null;
+        let entryToDelete = null;
 
-                this.initElements();
-                this.initEventListeners();
-                this.checkAuthState();
-                this.initDarkMode();
+        // Éléments DOM
+        const authSection = document.getElementById('authSection');
+        const registerSection = document.getElementById('registerSection');
+        const appContent = document.getElementById('appContent');
+        const userSection = document.getElementById('userSection');
+        const historyList = document.getElementById('historyList');
+        const messageContainer = document.getElementById('messageContainer');
+        const userName = document.getElementById('userName');
+        const userAvatar = document.getElementById('userAvatar');
+        const moodNote = document.getElementById('moodNote');
+        const saveMoodBtn = document.getElementById('saveMoodBtn');
+        const confirmModal = document.getElementById('confirmModal');
+        const modalClose = document.getElementById('modalClose');
+        const modalCancel = document.getElementById('modalCancel');
+        const modalConfirm = document.getElementById('modalConfirm');
+        const deleteAccountModal = document.getElementById('deleteAccountModal');
+        const deleteAccountBtn = document.getElementById('deleteAccountBtn');
+        const deleteAccountModalClose = document.getElementById('deleteAccountModalClose');
+        const cancelDeleteAccount = document.getElementById('cancelDeleteAccount');
+        const confirmDeleteAccount = document.getElementById('confirmDeleteAccount');
+        const confirmPassword = document.getElementById('confirmPassword');
+
+        // Initialisation de l'application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Vérifier si l'utilisateur est déjà connecté
+            const storedUser = localStorage.getItem('currentUser');
+            if (storedUser) {
+                currentUser = JSON.parse(storedUser);
+                userHistory = JSON.parse(localStorage.getItem(`userHistory_${currentUser.email}`)) || [];
+                showAppContent();
             }
 
-            initElements() {
-                this.elements = {
-                    authSection: document.getElementById('authSection'),
-                    registerSection: document.getElementById('registerSection'),
-                    appContent: document.getElementById('appContent'),
-                    userSection: document.getElementById('userSection'),
-                    historyList: document.getElementById('historyList'),
-                    messageContainer: document.getElementById('messageContainer'),
-                    userName: document.getElementById('userName'),
-                    userAvatar: document.getElementById('userAvatar'),
-                    moodNote: document.getElementById('moodNote'),
-                    saveMoodBtn: document.getElementById('saveMoodBtn'),
-                    darkModeToggle: document.getElementById('darkModeToggle'),
-                    loginEmail: document.getElementById('loginEmail'),
-                    loginPassword: document.getElementById('loginPassword'),
-                    loginBtn: document.getElementById('loginBtn'),
-                    registerName: document.getElementById('registerName'),
-                    registerEmail: document.getElementById('registerEmail'),
-                    registerPassword: document.getElementById('registerPassword'),
-                    registerConfirmPassword: document.getElementById('registerConfirmPassword'),
-                    registerBtn: document.getElementById('registerBtn'),
-                    showRegister: document.getElementById('showRegister'),
-                    showLogin: document.getElementById('showLogin'),
-                    logoutBtn: document.getElementById('logoutBtn'),
-                    refreshHistory: document.getElementById('refreshHistory'),
-                    confirmModal: document.getElementById('confirmModal'),
-                    modalClose: document.getElementById('modalClose'),
-                    modalCancel: document.getElementById('modalCancel'),
-                    modalConfirm: document.getElementById('modalConfirm'),
-                    deleteAccountModal: document.getElementById('deleteAccountModal'),
-                    deleteAccountBtn: document.getElementById('deleteAccountBtn'),
-                    deleteAccountModalClose: document.getElementById('deleteAccountModalClose'),
-                    cancelDeleteAccount: document.getElementById('cancelDeleteAccount'),
-                    confirmDeleteAccount: document.getElementById('confirmDeleteAccount'),
-                    confirmPassword: document.getElementById('confirmPassword'),
-                    moodChart: document.getElementById('moodChart')
-                };
-            }
+            // Gestionnaires d'événements pour les formulaires
+            document.getElementById('loginBtn').addEventListener('click', login);
+            document.getElementById('registerBtn').addEventListener('click', register);
+            document.getElementById('showRegister').addEventListener('click', showRegisterForm);
+            document.getElementById('showLogin').addEventListener('click', showLoginForm);
+            document.getElementById('logoutBtn').addEventListener('click', logout);
+            document.getElementById('refreshHistory').addEventListener('click', loadHistory);
 
-            initEventListeners() {
-                // Authentification
-                this.elements.loginBtn.addEventListener('click', () => this.login());
-                this.elements.registerBtn.addEventListener('click', () => this.register());
-                this.elements.showRegister.addEventListener('click', (e) => this.showRegisterForm(e));
-                this.elements.showLogin.addEventListener('click', (e) => this.showLoginForm(e));
-                this.elements.logoutBtn.addEventListener('click', () => this.logout());
+            // Gestionnaire pour enregistrer l'humeur
+            saveMoodBtn.addEventListener('click', saveCurrentMood);
 
-                // Humeurs
-                document.querySelectorAll('.mood-option').forEach(option => {
-                    option.addEventListener('click', () => this.selectMood(option));
-                });
-                this.elements.saveMoodBtn.addEventListener('click', () => this.saveMood());
+            // Gestionnaires pour la modal
+            modalClose.addEventListener('click', closeModal);
+            modalCancel.addEventListener('click', closeModal);
+            modalConfirm.addEventListener('click', confirmDelete);
 
-                // Historique
-                this.elements.refreshHistory.addEventListener('click', () => this.loadHistory());
+            // Gestionnaires pour la suppression de compte
+            deleteAccountBtn.addEventListener('click', () => {
+                deleteAccountModal.style.display = 'flex';
+            });
+            
+            deleteAccountModalClose.addEventListener('click', () => {
+                deleteAccountModal.style.display = 'none';
+                confirmPassword.value = '';
+            });
+            
+            cancelDeleteAccount.addEventListener('click', () => {
+                deleteAccountModal.style.display = 'none';
+                confirmPassword.value = '';
+            });
+            
+            confirmDeleteAccount.addEventListener('click', deleteAccount);
 
-                // Modals
-                this.elements.modalClose.addEventListener('click', () => this.closeModal());
-                this.elements.modalCancel.addEventListener('click', () => this.closeModal());
-                this.elements.modalConfirm.addEventListener('click', () => this.confirmDelete());
-                this.elements.deleteAccountBtn.addEventListener('click', () => this.showDeleteAccountModal());
-                this.elements.deleteAccountModalClose.addEventListener('click', () => this.closeDeleteAccountModal());
-                this.elements.cancelDeleteAccount.addEventListener('click', () => this.closeDeleteAccountModal());
-                this.elements.confirmDeleteAccount.addEventListener('click', () => this.deleteAccount());
-
-                // Dark mode
-                this.elements.darkModeToggle.addEventListener('click', () => this.toggleDarkMode());
-            }
-
-            checkAuthState() {
-                const storedUser = localStorage.getItem('currentUser');
-                if (storedUser) {
-                    this.currentUser = JSON.parse(storedUser);
-                    this.userHistory = JSON.parse(localStorage.getItem(`userHistory_${this.currentUser.email}`)) || [];
-                    this.showAppContent();
-                }
-            }
-
-            initDarkMode() {
-                const savedMode = localStorage.getItem('darkMode') === 'true';
-                if (savedMode) {
-                    this.darkMode = true;
-                    document.body.classList.add('dark-mode');
-                    this.elements.darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-                }
-            }
-
-            toggleDarkMode() {
-                this.darkMode = !this.darkMode;
-                document.body.classList.toggle('dark-mode', this.darkMode);
-                this.elements.darkModeToggle.innerHTML = this.darkMode 
-                    ? '<i class="fas fa-sun"></i>' 
-                    : '<i class="fas fa-moon"></i>';
-                localStorage.setItem('darkMode', this.darkMode);
-            }
-
-            login() {
-                const email = this.elements.loginEmail.value.trim();
-                const password = this.elements.loginPassword.value.trim();
-
-                if (!email || !password) {
-                    this.showMessage('Veuillez remplir tous les champs', 'error');
-                    return;
-                }
-
-                const users = JSON.parse(localStorage.getItem('users')) || [];
-                const user = users.find(u => u.email === email && u.password === password);
-
-                if (user) {
-                    this.currentUser = user;
-                    localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-                    this.userHistory = JSON.parse(localStorage.getItem(`userHistory_${this.currentUser.email}`)) || [];
-                    this.showAppContent();
-                    this.showMessage('Connexion réussie !', 'success');
-                } else {
-                    this.showMessage('Email ou mot de passe incorrect', 'error');
-                }
-            }
-
-            register() {
-                const name = this.elements.registerName.value.trim();
-                const email = this.elements.registerEmail.value.trim();
-                const password = this.elements.registerPassword.value.trim();
-                const confirmPassword = this.elements.registerConfirmPassword.value.trim();
-
-                if (!name || !email || !password || !confirmPassword) {
-                    this.showMessage('Veuillez remplir tous les champs', 'error');
-                    return;
-                }
-
-                if (password !== confirmPassword) {
-                    this.showMessage('Les mots de passe ne correspondent pas', 'error');
-                    return;
-                }
-
-                if (password.length < 6) {
-                    this.showMessage('Le mot de passe doit contenir au moins 6 caractères', 'error');
-                    return;
-                }
-
-                const users = JSON.parse(localStorage.getItem('users')) || [];
-                const userExists = users.some(u => u.email === email);
-
-                if (userExists) {
-                    this.showMessage('Un compte avec cet email existe déjà', 'error');
-                    return;
-                }
-
-                const newUser = {
-                    name,
-                    email,
-                    password,
-                    createdAt: new Date().toISOString()
-                };
-
-                users.push(newUser);
-                localStorage.setItem('users', JSON.stringify(users));
-
-                this.currentUser = newUser;
-                localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-                this.userHistory = [];
-                this.showAppContent();
-                this.showMessage('Inscription réussie ! Bienvenue sur MoodMate', 'success');
-            }
-
-            showRegisterForm(e) {
-                e.preventDefault();
-                this.elements.registerSection.classList.remove('hidden');
-                this.elements.authSection.querySelector('.auth-section:not(#registerSection)').classList.add('hidden');
-            }
-
-            showLoginForm(e) {
-                if (e) e.preventDefault();
-                this.elements.registerSection.classList.add('hidden');
-                this.elements.authSection.querySelector('.auth-section:not(#registerSection)').classList.remove('hidden');
-            }
-
-            logout() {
-                this.currentUser = null;
-                localStorage.removeItem('currentUser');
-                this.elements.authSection.classList.remove('hidden');
-                this.elements.appContent.classList.add('hidden');
-                this.elements.userSection.classList.add('hidden');
-                this.showLoginForm();
-                this.showMessage('Vous avez été déconnecté avec succès', 'success');
-            }
-
-            showAppContent() {
-                this.elements.authSection.classList.add('hidden');
-                this.elements.appContent.classList.remove('hidden');
-                this.elements.userSection.classList.remove('hidden');
-
-                this.elements.userName.textContent = this.currentUser.name;
-                this.elements.userAvatar.textContent = this.currentUser.name.charAt(0).toUpperCase();
-
-                this.loadHistory();
-                this.initChart();
-            }
-
-            selectMood(option) {
-                document.querySelectorAll('.mood-option').forEach(opt => opt.classList.remove('selected'));
-                option.classList.add('selected');
-                this.selectedMood = option.getAttribute('data-mood');
-            }
-
-            saveMood() {
-                if (!this.selectedMood) {
-                    this.showMessage('Veuillez sélectionner une humeur', 'error');
-                    return;
-                }
-
-                const note = this.elements.moodNote.value.trim();
-                const now = new Date();
-
-                if (this.editingEntryId) {
-                    // Mise à jour d'une entrée existante
-                    const entryIndex = this.userHistory.findIndex(e => e.id === this.editingEntryId);
-                    if (entryIndex !== -1) {
-                        this.userHistory[entryIndex] = {
-                            ...this.userHistory[entryIndex],
-                            mood: this.selectedMood,
-                            note,
-                            date: now.toISOString()
-                        };
-                        
-                        localStorage.setItem(`userHistory_${this.currentUser.email}`, JSON.stringify(this.userHistory));
-                        this.showMessage('Entrée mise à jour avec succès', 'success');
-                    }
-                } else {
-                    // Création d'une nouvelle entrée
-                    const moodEntry = {
-                        id: Date.now(),
-                        mood: this.selectedMood,
-                        note,
-                        date: now.toISOString(),
-                        timestamp: now.getTime()
-                    };
-
-                    this.userHistory.unshift(moodEntry);
-                    localStorage.setItem(`userHistory_${this.currentUser.email}`, JSON.stringify(this.userHistory));
-                    this.showMessage('Humeur enregistrée avec succès', 'success');
-                }
-
-                // Réinitialiser le formulaire
-                this.resetMoodForm();
-                this.loadHistory();
-                this.updateChart();
-            }
-
-            resetMoodForm() {
-                document.querySelector('.mood-option.selected')?.classList.remove('selected');
-                this.selectedMood = null;
-                this.elements.moodNote.value = '';
-                this.editingEntryId = null;
-                this.elements.saveMoodBtn.textContent = 'Enregistrer mon humeur';
-            }
-
-            loadHistory() {
-                if (!this.currentUser) return;
-
-                this.userHistory = JSON.parse(localStorage.getItem(`userHistory_${this.currentUser.email}`)) || [];
-                this.elements.historyList.innerHTML = '';
-
-                if (this.userHistory.length === 0) {
-                    this.elements.historyList.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">Aucune entrée dans votre historique</p>';
-                    return;
-                }
-
-                this.userHistory.forEach(entry => {
-                    const moodEmoji = this.getMoodEmoji(entry.mood);
-                    const formattedDate = this.formatDate(entry.date);
-
-                    const entryElement = document.createElement('div');
-                    entryElement.className = 'history-item';
-                    entryElement.innerHTML = `
-                        <div class="history-emoji">${moodEmoji}</div>
-                        <div class="history-details">
-                            <div class="history-date">${formattedDate}</div>
-                            <div class="history-mood">${this.capitalizeFirstLetter(entry.mood)}</div>
-                            ${entry.note ? `<div class="history-note">${entry.note}</div>` : ''}
-                        </div>
-                        <div class="history-actions">
-                            <button class="btn btn-secondary btn-small edit-btn" data-id="${entry.id}">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-danger btn-small delete-btn" data-id="${entry.id}">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    `;
+            // Gestionnaires d'événements pour les options d'humeur
+            const moodOptions = document.querySelectorAll('.mood-option');
+            moodOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Retirer la sélection précédente
+                    moodOptions.forEach(opt => opt.classList.remove('selected'));
                     
-                    this.elements.historyList.appendChild(entryElement);
+                    // Sélectionner la nouvelle humeur
+                    this.classList.add('selected');
+                    selectedMood = this.getAttribute('data-mood');
                 });
+            });
+        });
 
-                // Ajouter les écouteurs d'événements pour les nouveaux boutons
-                document.querySelectorAll('.edit-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        this.editEntry(parseInt(e.currentTarget.getAttribute('data-id')));
-                    });
-                });
-
-                document.querySelectorAll('.delete-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        this.showDeleteConfirmation(parseInt(e.currentTarget.getAttribute('data-id')));
-                    });
-                });
+        // Fonction pour supprimer le compte
+        function deleteAccount() {
+            const password = confirmPassword.value;
+            
+            if (!password) {
+                showMessage('Veuillez entrer votre mot de passe', 'error');
+                return;
             }
-
-            getMoodEmoji(mood) {
-                const emojis = {
-                    happy: '😊',
-                    sad: '😢',
-                    angry: '😠',
-                    stressed: '😰',
-                    tired: '😴',
-                    calm: '😌'
-                };
-                return emojis[mood] || '😐';
+            
+            if (password !== currentUser.password) {
+                showMessage('Mot de passe incorrect', 'error');
+                return;
             }
+            
+            // Supprimer l'utilisateur de la liste des utilisateurs
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const updatedUsers = users.filter(u => u.email !== currentUser.email);
+            localStorage.setItem('users', JSON.stringify(updatedUsers));
+            
+            // Supprimer les données de l'utilisateur
+            localStorage.removeItem(`userHistory_${currentUser.email}`);
+            localStorage.removeItem('currentUser');
+            
+            // Réinitialiser l'application
+            currentUser = null;
+            userHistory = [];
+            
+            // Afficher le formulaire de connexion
+            authSection.classList.remove('hidden');
+            appContent.classList.add('hidden');
+            userSection.classList.add('hidden');
+            showLoginForm();
+            
+            // Fermer la modal et réinitialiser le champ de mot de passe
+            deleteAccountModal.style.display = 'none';
+            confirmPassword.value = '';
+            
+            showMessage('Votre compte a été supprimé avec succès', 'success');
+        }
 
-            formatDate(dateString) {
-                const options = { 
-                    weekday: 'long', 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                };
-                return new Date(dateString).toLocaleDateString('fr-FR', options);
+        // Fonctions d'authentification
+        function login() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!email || !password) {
+                showMessage('Veuillez remplir tous les champs', 'error');
+                return;
             }
-
-            initChart() {
-                const ctx = this.elements.moodChart.getContext('2d');
+            
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                currentUser = user;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
                 
-                this.moodChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: [],
-                        datasets: [{
-                            label: 'Votre humeur',
-                            data: [],
-                            backgroundColor: 'rgba(201, 158, 115, 0.2)',
-                            borderColor: 'rgba(201, 158, 115, 1)',
-                            borderWidth: 2,
-                            tension: 0.4,
-                            fill: true
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: false,
-                                ticks: {
-                                    callback: function(value) {
-                                        const moods = {
-                                            1: 'Triste',
-                                            2: 'Fatigué',
-                                            3: 'Stressé',
-                                            4: 'Calme',
-                                            5: 'Heureux'
-                                        };
-                                        return moods[value] || '';
-                                    }
+                // Charger l'historique de l'utilisateur
+                userHistory = JSON.parse(localStorage.getItem(`userHistory_${currentUser.email}`)) || [];
+                
+                showAppContent();
+                showMessage('Connexion réussie !', 'success');
+            } else {
+                showMessage('Email ou mot de passe incorrect', 'error');
+            }
+        }
+
+        function register() {
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+
+            // Validation des champs
+            if (!name || !email || !password || !confirmPassword) {
+                showMessage('Veuillez remplir tous les champs', 'error');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showMessage('Les mots de passe ne correspondent pas', 'error');
+                return;
+            }
+
+            if (password.length < 6) {
+                showMessage('Le mot de passe doit contenir au moins 6 caractères', 'error');
+                return;
+            }
+
+            // Vérifier si l'utilisateur existe déjà
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const userExists = users.some(u => u.email === email);
+
+            if (userExists) {
+                showMessage('Un compte avec cet email existe déjà', 'error');
+                return;
+            }
+
+            // Créer un nouvel utilisateur
+            const newUser = {
+                name,
+                email,
+                password,
+                createdAt: new Date().toISOString()
+            };
+
+            // Enregistrer l'utilisateur
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+
+            // Connecter automatiquement l'utilisateur
+            currentUser = newUser;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            userHistory = [];
+
+            showAppContent();
+            showMessage('Inscription réussie ! Bienvenue sur MoodMate', 'success');
+        }
+
+        function showRegisterForm(e) {
+            e.preventDefault();
+            document.getElementById('registerSection').classList.remove('hidden');
+            document.querySelector('.auth-section:not(#registerSection)').classList.add('hidden');
+        }
+
+        function showLoginForm(e) {
+            if (e) e.preventDefault();
+            document.getElementById('registerSection').classList.add('hidden');
+            document.querySelector('.auth-section:not(#registerSection)').classList.remove('hidden');
+        }
+
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            authSection.classList.remove('hidden');
+            appContent.classList.add('hidden');
+            userSection.classList.add('hidden');
+            showLoginForm();
+            showMessage('Vous avez été déconnecté avec succès', 'success');
+        }
+
+        function showAppContent() {
+            authSection.classList.add('hidden');
+            appContent.classList.remove('hidden');
+            userSection.classList.remove('hidden');
+
+            // Mettre à jour les informations utilisateur
+            userName.textContent = currentUser.name;
+            userAvatar.textContent = currentUser.name.charAt(0).toUpperCase();
+
+            // Charger l'historique et le graphique
+            loadHistory();
+            initChart();
+        }
+
+        function saveCurrentMood() {
+            if (!selectedMood) {
+                showMessage('Veuillez sélectionner une humeur', 'error');
+                return;
+            }
+
+            const note = moodNote.value.trim();
+            const now = new Date();
+
+            const moodEntry = {
+                id: Date.now(),
+                mood: selectedMood,
+                note,
+                date: now.toISOString(),
+                timestamp: now.getTime()
+            };
+
+            // Ajouter à l'historique
+            userHistory.unshift(moodEntry);
+            localStorage.setItem(`userHistory_${currentUser.email}`, JSON.stringify(userHistory));
+
+            // Réinitialiser le formulaire
+            document.querySelector('.mood-option.selected')?.classList.remove('selected');
+            selectedMood = null;
+            moodNote.value = '';
+
+            // Mettre à jour l'affichage
+            loadHistory();
+            updateChart();
+            showMessage('Humeur enregistrée avec succès', 'success');
+        }
+
+        function loadHistory() {
+            if (!currentUser) return;
+
+            // Récupérer l'historique depuis le localStorage
+            userHistory = JSON.parse(localStorage.getItem(`userHistory_${currentUser.email}`)) || [];
+            
+            // Vider la liste actuelle
+            historyList.innerHTML = '';
+
+            // Afficher chaque entrée
+            userHistory.forEach(entry => {
+                const moodEmoji = getMoodEmoji(entry.mood);
+                const formattedDate = formatDate(entry.date);
+
+                const entryElement = document.createElement('div');
+                entryElement.className = 'history-item';
+                entryElement.innerHTML = `
+                    <div class="history-emoji">${moodEmoji}</div>
+                    <div class="history-details">
+                        <div class="history-date">${formattedDate}</div>
+                        <div class="history-mood">${capitalizeFirstLetter(entry.mood)}</div>
+                        ${entry.note ? `<div class="history-note">${entry.note}</div>` : ''}
+                    </div>
+                    <div class="history-actions">
+                        <button class="btn btn-secondary btn-small" onclick="editEntry(${entry.id})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-danger btn-small" onclick="showDeleteConfirmation(${entry.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                
+                historyList.appendChild(entryElement);
+            });
+        }
+
+        function getMoodEmoji(mood) {
+            const emojis = {
+                happy: '😊',
+                sad: '😢',
+                angry: '😠',
+                stressed: '😰',
+                tired: '😴',
+                calm: '😌'
+            };
+            return emojis[mood] || '😐';
+        }
+
+        function formatDate(dateString) {
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            return new Date(dateString).toLocaleDateString('fr-FR', options);
+        }
+
+        function showMessage(message, type) {
+            messageContainer.innerHTML = `
+                <div class="message ${type}">${message}</div>
+            `;
+            
+            // Supprimer le message après 5 secondes
+            setTimeout(() => {
+                const messageElement = document.querySelector('.message');
+                if (messageElement) {
+                    messageElement.style.opacity = '0';
+                    setTimeout(() => messageElement.remove(), 300);
+                }
+            }, 5000);
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('moodChart').getContext('2d');
+            
+            moodChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Votre humeur',
+                        data: [],
+                        backgroundColor: 'rgba(201, 158, 115, 0.2)',
+                        borderColor: 'rgba(201, 158, 115, 1)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            ticks: {
+                                callback: function(value) {
+                                    const moods = {
+                                        1: 'Triste',
+                                        2: 'Fatigué',
+                                        3: 'Stressé',
+                                        4: 'Calme',
+                                        5: 'Heureux'
+                                    };
+                                    return moods[value] || '';
                                 }
                             }
                         }
                     }
-                });
-                
-                this.updateChart();
-            }
-
-            updateChart() {
-                if (!this.moodChart) return;
-
-                const last7Days = this.userHistory
-                    .slice(0, 7)
-                    .sort((a, b) => new Date(a.date) - new Date(b.date));
-
-                const labels = last7Days.map(entry => 
-                    new Date(entry.date).toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric' })
-                );
-
-                const data = last7Days.map(entry => {
-                    const moodValues = {
-                        sad: 1,
-                        tired: 2,
-                        stressed: 3,
-                        calm: 4,
-                        happy: 5,
-                        angry: 1.5
-                    };
-                    return moodValues[entry.mood] || 3;
-                });
-
-                this.moodChart.data.labels = labels;
-                this.moodChart.data.datasets[0].data = data;
-                this.moodChart.update();
-            }
-
-            showDeleteConfirmation(entryId) {
-                this.entryToDelete = entryId;
-                document.getElementById('modalTitle').textContent = 'Confirmer la suppression';
-                document.getElementById('modalMessage').textContent = 'Êtes-vous sûr de vouloir supprimer cette entrée ?';
-                this.showModal(this.elements.confirmModal);
-            }
-
-            showDeleteAccountModal() {
-                this.showModal(this.elements.deleteAccountModal);
-            }
-
-            showModal(modal) {
-                modal.classList.add('show');
-                setTimeout(() => {
-                    modal.querySelector('.modal-content').style.transform = 'translateY(0)';
-                    modal.querySelector('.modal-content').style.opacity = '1';
-                }, 10);
-            }
-
-            closeModal() {
-                this.elements.confirmModal.classList.remove('show');
-                this.elements.confirmModal.querySelector('.modal-content').style.transform = 'translateY(-20px)';
-                this.elements.confirmModal.querySelector('.modal-content').style.opacity = '0';
-                this.entryToDelete = null;
-            }
-
-            closeDeleteAccountModal() {
-                this.elements.deleteAccountModal.classList.remove('show');
-                this.elements.deleteAccountModal.querySelector('.modal-content').style.transform = 'translateY(-20px)';
-                this.elements.deleteAccountModal.querySelector('.modal-content').style.opacity = '0';
-                this.elements.confirmPassword.value = '';
-            }
-
-            confirmDelete() {
-                if (!this.entryToDelete) return;
-
-                this.userHistory = this.userHistory.filter(entry => entry.id !== this.entryToDelete);
-                localStorage.setItem(`userHistory_${this.currentUser.email}`, JSON.stringify(this.userHistory));
-
-                this.loadHistory();
-                this.updateChart();
-                this.closeModal();
-                this.showMessage('Entrée supprimée avec succès', 'success');
-            }
-
-            editEntry(entryId) {
-                const entry = this.userHistory.find(e => e.id === entryId);
-                if (!entry) return;
-
-                // Sélectionner l'humeur correspondante
-                document.querySelectorAll('.mood-option').forEach(option => {
-                    option.classList.remove('selected');
-                    if (option.getAttribute('data-mood') === entry.mood) {
-                        option.classList.add('selected');
-                        this.selectedMood = entry.mood;
-                    }
-                });
-
-                // Remplir la note
-                this.elements.moodNote.value = entry.note || '';
-                this.editingEntryId = entryId;
-
-                // Mettre à jour le bouton d'enregistrement
-                this.elements.saveMoodBtn.textContent = 'Mettre à jour';
-
-                // Faire défiler jusqu'au formulaire
-                document.querySelector('.mood-selector').scrollIntoView({ behavior: 'smooth' });
-
-                this.showMessage('Modifiez votre entrée et cliquez sur "Mettre à jour"', 'success');
-            }
-
-            deleteAccount() {
-                const password = this.elements.confirmPassword.value;
-                
-                if (!password) {
-                    this.showMessage('Veuillez entrer votre mot de passe', 'error');
-                    return;
                 }
-                
-                if (password !== this.currentUser.password) {
-                    this.showMessage('Mot de passe incorrect', 'error');
-                    return;
+            });
+            
+            updateChart();
+        }
+
+        function updateChart() {
+            if (!moodChart) return;
+
+            // Préparer les données pour les 7 derniers jours
+            const last7Days = userHistory
+                .slice(0, 7)
+                .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            const labels = last7Days.map(entry => 
+                new Date(entry.date).toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric' })
+            );
+
+            const data = last7Days.map(entry => {
+                // Convertir l'humeur en valeur numérique pour le graphique
+                const moodValues = {
+                    sad: 1,
+                    tired: 2,
+                    stressed: 3,
+                    calm: 4,
+                    happy: 5,
+                    angry: 1.5
+                };
+                return moodValues[entry.mood] || 3;
+            });
+
+            // Mettre à jour le graphique
+            moodChart.data.labels = labels;
+            moodChart.data.datasets[0].data = data;
+            moodChart.update();
+        }
+
+        function showDeleteConfirmation(entryId) {
+            entryToDelete = entryId;
+            document.getElementById('modalTitle').textContent = 'Confirmer la suppression';
+            document.getElementById('modalMessage').textContent = 'Êtes-vous sûr de vouloir supprimer cette entrée ?';
+            confirmModal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            confirmModal.style.display = 'none';
+            entryToDelete = null;
+        }
+
+        function confirmDelete() {
+            if (!entryToDelete) return;
+
+            // Supprimer l'entrée de l'historique
+            userHistory = userHistory.filter(entry => entry.id !== entryToDelete);
+            localStorage.setItem(`userHistory_${currentUser.email}`, JSON.stringify(userHistory));
+
+            // Mettre à jour l'affichage
+            loadHistory();
+            updateChart();
+            closeModal();
+            showMessage('Entrée supprimée avec succès', 'success');
+        }
+
+        function editEntry(entryId) {
+            const entry = userHistory.find(e => e.id === entryId);
+            if (!entry) return;
+
+            // Sélectionner l'humeur correspondante
+            document.querySelectorAll('.mood-option').forEach(option => {
+                option.classList.remove('selected');
+                if (option.getAttribute('data-mood') === entry.mood) {
+                    option.classList.add('selected');
+                    selectedMood = entry.mood;
                 }
-                
-                const users = JSON.parse(localStorage.getItem('users')) || [];
-                const updatedUsers = users.filter(u => u.email !== this.currentUser.email);
-                localStorage.setItem('users', JSON.stringify(updatedUsers));
-                
-                localStorage.removeItem(`userHistory_${this.currentUser.email}`);
-                localStorage.removeItem('currentUser');
-                
-                this.currentUser = null;
-                this.userHistory = [];
-                
-                this.elements.authSection.classList.remove('hidden');
-                this.elements.appContent.classList.add('hidden');
-                this.elements.userSection.classList.add('hidden');
-                this.showLoginForm();
-                
-                this.closeDeleteAccountModal();
-                this.elements.confirmPassword.value = '';
-                
-                this.showMessage('Votre compte a été supprimé avec succès', 'success');
+            });
+
+            // Remplir la note
+            moodNote.value = entry.note || '';
+
+            // Faire défiler jusqu'au formulaire
+            document.querySelector('.mood-selector').scrollIntoView({ behavior: 'smooth' });
+
+            // Mettre à jour le bouton d'enregistrement
+            saveMoodBtn.textContent = 'Mettre à jour';
+            saveMoodBtn.onclick = function() {
+                updateEntry(entryId);
+            };
+
+            showMessage('Modifiez votre entrée et cliquez sur "Mettre à jour"', 'success');
+        }
+
+        function updateEntry(entryId) {
+            if (!selectedMood) {
+                showMessage('Veuillez sélectionner une humeur', 'error');
+                return;
             }
 
-            showMessage(message, type) {
-                this.elements.messageContainer.innerHTML = `
-                    <div class="message ${type}">${message}</div>
-                `;
-                
-                setTimeout(() => {
-                    const messageElement = document.querySelector('.message');
-                    if (messageElement) {
-                        messageElement.style.opacity = '0';
-                        setTimeout(() => messageElement.remove(), 300);
-                    }
-                }, 5000);
-            }
+            const note = moodNote.value.trim();
+            const entryIndex = userHistory.findIndex(e => e.id === entryId);
 
-            capitalizeFirstLetter(string) {
-                return string.charAt(0).toUpperCase() + string.slice(1);
+            if (entryIndex !== -1) {
+                // Mettre à jour l'entrée
+                userHistory[entryIndex].mood = selectedMood;
+                userHistory[entryIndex].note = note;
+                userHistory[entryIndex].date = new Date().toISOString();
+
+                // Sauvegarder
+                localStorage.setItem(`userHistory_${currentUser.email}`, JSON.stringify(userHistory));
+
+                // Réinitialiser le formulaire
+                document.querySelector('.mood-option.selected')?.classList.remove('selected');
+                selectedMood = null;
+                moodNote.value = '';
+                saveMoodBtn.textContent = 'Enregistrer mon humeur';
+                saveMoodBtn.onclick = saveCurrentMood;
+
+                // Mettre à jour l'affichage
+                loadHistory();
+                updateChart();
+                showMessage('Entrée mise à jour avec succès', 'success');
             }
         }
 
-        // Fonctions de partage globales
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        // Fonctions de partage améliorées
         function shareOnFacebook() {
-            const url = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent("Découvrez MoodMate - Mon journal d'humeur interactif !");
-            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
+            const url = window.location.href;
+            const quote = "Découvrez MoodMate - Mon journal d'humeur interactif !";
+            
+            const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(quote)}`;
+            
+            const width = 600, height = 400;
+            const left = (window.innerWidth - width) / 2;
+            const top = (window.innerHeight - height) / 2;
+            
+            window.open(shareUrl, 'Partager sur Facebook', 
+                `width=${width},height=${height},top=${top},left=${left}`);
+        }
+
+        function shareOnInstagram() {
+            const url = window.location.href;
+            const text = "Découvrez MoodMate - Mon journal d'humeur interactif ! 🌟 #BienEtre #JournalHumeur";
+            
+            // Solution optimale pour tous les appareils
+            if (navigator.share) {
+                // Utilisation de l'API Web Share si disponible (mobile)
+                navigator.share({
+                    title: 'MoodMate',
+                    text: text,
+                    url: url
+                }).catch(err => {
+                    console.log('Erreur de partage:', err);
+                    fallbackShare();
+                });
+            } else {
+                fallbackShare();
+            }
+            
+            function fallbackShare() {
+                // Solution pour iOS
+                if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                    window.open(`instagram://library?AssetPath=${encodeURIComponent(url)}&InstagramCaption=${encodeURIComponent(text)}`, '_blank');
+                } 
+                // Solution pour Android
+                else if (/Android/i.test(navigator.userAgent)) {
+                    window.open(`intent://share?text=${encodeURIComponent(text + "\n" + url)}#Intent;package=com.instagram.android;scheme=https;end`, '_blank');
+                }
+                // Solution pour desktop
+                else {
+                    window.open(`https://www.instagram.com/?url=${encodeURIComponent(url)}&caption=${encodeURIComponent(text)}`, '_blank');
+                }
+                
+                // Copie dans le presse-papiers en fallback
+                setTimeout(() => {
+                    const fullText = `${text}\n${url}`;
+                    navigator.clipboard.writeText(fullText)
+                        .then(() => showMessage('Lien copié ! Ouvrez Instagram pour partager.', 'success'))
+                        .catch(() => showMessage(`Ouvrez Instagram et partagez : ${fullText}`, 'error'));
+                }, 300);
+            }
         }
 
         function shareOnTwitter() {
@@ -1433,28 +1345,11 @@
             window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
         }
 
-        function shareOnInstagram() {
-            navigator.clipboard.writeText(window.location.href)
-                .then(() => {
-                    const app = new MoodMateApp();
-                    app.showMessage('Lien copié dans le presse-papiers ! Collez-le dans votre story Instagram.', 'success');
-                })
-                .catch(() => {
-                    const app = new MoodMateApp();
-                    app.showMessage('Impossible de copier le lien. Veuillez le copier manuellement.', 'error');
-                });
-        }
-
         function shareOnWhatsApp() {
             const url = encodeURIComponent(window.location.href);
             const text = encodeURIComponent("Regarde MoodMate - Mon journal d'humeur interactif !");
             window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
         }
-
-        // Initialisation de l'application
-        document.addEventListener('DOMContentLoaded', () => {
-            const app = new MoodMateApp();
-        });
     </script>
 </body>
 </html>
